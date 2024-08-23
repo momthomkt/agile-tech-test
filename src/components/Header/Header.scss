@@ -1,0 +1,45 @@
+.main {
+  .hbox {
+    max-width: 1120px;
+    height: 70px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    .logo-container {
+      // display: flex;
+      // align-items:end;
+      margin-right: auto;
+      // .logo-circle {
+      //   width: 24px;
+      //   height: 24px;
+      //   border-radius: 50%;
+      //   background-color: var(--color-3);
+      //   // background: linear-gradient(135deg, #9b59b6, #e74c3c);
+      // }
+      // .logo-bar {
+      //   width: 16px;
+      //   height: 32px;
+      //   border-radius: 8px;
+      //   margin-left: 8px;
+      //   background-color: var(--color-4);
+      //   // background: linear-gradient(135deg, #8e44ad, #3498db);
+      // }
+    }
+    .btn-header {
+      width: 208.7px;
+      height: 59.63px;
+      border-radius: 50px;
+      background-color: var(--color-3);
+      outline: none;
+      border: none;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}

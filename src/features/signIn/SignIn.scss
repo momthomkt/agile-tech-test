@@ -1,0 +1,55 @@
+.sign-in-container{
+  .content {
+    max-width: 413px;
+    margin: 0 auto;
+    padding-top: 50px;
+    h1 {
+      font-size: 4rem;
+      font-weight: 400;
+      line-height: 6.4rem;
+      letter-spacing: 0.005em;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.6rem;
+      letter-spacing: 0.005em;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 407px;
+      height: 57px;
+      border-radius: 6px;
+      border: 1px solid black;
+      padding: 10px;
+      margin-bottom: 40px;
+    }
+    button.submit {
+      width: 413px;
+      height: 53px;
+      border-radius: 50px;
+      border: none;
+      background-color: var(--color-3);
+      color: white;
+    }
+  }
+  @media(max-width: 600px) {
+    padding: 0 15px;
+    .content {
+      max-width: 100%;
+      h1, label, input, button.submit {
+        width: 100%;
+      }
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 30px;
+      }
+      input {
+        margin-bottom: 30px;
+      }
+    } 
+  }
+}

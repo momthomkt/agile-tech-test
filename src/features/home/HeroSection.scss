@@ -1,0 +1,275 @@
+.hero-section {
+    // margin-top: 150px;
+    margin: 150px 0;
+  .hbox {
+    // text-align: left;
+    display: flex;
+    .hero-content {
+      max-width: 55%;
+      text-align: left;
+      h1 {
+        font-weight: 700;
+        font-size: 80px;
+        color: var(--color-2);
+        margin-bottom: 3.125rem;
+      }
+      p {
+        // font-family:'Avenir';
+        width: 60%;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 28.8px;
+        color: var(--color-1);
+      }
+      .learn-more {
+        width: 168.94px;
+        height: 59.63px;
+        font-weight: 800;
+        font-size: 18px;
+        margin-top: 3.75rem;
+      }
+    }
+    .hero-img-container {
+      // max-width: 45%;
+      position: absolute;
+      top: 345px;
+      right: 180px;
+      z-index: -1;
+      .hero-img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    }
+  }
+////////////////////////////////////
+  // Breakpoint for large screens (desktop)
+  @media (max-width: 1200px) {
+    .hbox {
+      justify-content: center;
+      align-items: flex-end;
+      .hero-content {
+        h1 {
+          font-size: 60px;
+        }
+
+        p {
+          width: 80%;
+        }
+      }
+
+      .hero-img-container {
+        position: static;
+        width: 50%;
+      }
+    }
+  }
+
+  // Breakpoint for tablets
+  @media (max-width: 768px) {
+    .hbox {
+      flex-direction: column;
+      align-items: center;
+
+      .hero-content {
+        max-width: 100%;
+        text-align: center;
+
+        h1 {
+          font-size: 50px;
+        }
+
+        p {
+          width: 90%;
+          margin: 0 auto;
+        }
+
+        .learn-more {
+          margin: 2rem auto;
+        }
+      }
+
+      .hero-img-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .hero-img {
+          max-width: 80%;
+        }
+      }
+    }
+  }
+
+  // Breakpoint for small screens (mobile)
+  @media (max-width: 480px) {
+    margin: 80px 0;
+
+    .hbox {
+      .hero-content {
+        h1 {
+          font-size: 36px;
+        }
+
+        p {
+          width: 100%;
+          font-size: 16px;
+          line-height: 24px;
+        }
+
+        .learn-more {
+          width: 140px;
+          height: 50px;
+        }
+      }
+
+      .hero-img-container {
+        .hero-img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// .hero-section {
+//   padding: 150px 0;
+//   background-color: #fff;
+//   position: relative;
+
+//   .container {
+//     display: flex;
+//     align-items: flex-start;
+//     // justify-content: space-between;
+//     max-width: 1120px;
+//     margin: 0 auto;
+//     padding: 0 15px;
+//     position: relative;
+//   }
+
+//   .hero-content {
+//     max-width: 50%;
+//     z-index: 1; /* Đảm bảo nội dung được xếp chồng lên ảnh nếu cần */
+    
+//     h1 {
+//       font-weight: 700;
+//       font-size: 4rem;
+//       line-height: 1.2;
+//       color: #2c2c2c;
+//       margin-bottom: 20px;
+//     }
+
+//     p {
+//       font-size: 1.125rem;
+//       line-height: 1.8;
+//       color: #4a4a4a;
+//       margin-bottom: 30px;
+//       max-width: 80%;
+//     }
+
+//     .learn-more {
+//       background-color: #6c63ff;
+//       color: #fff;
+//       padding: 15px 30px;
+//       border: none;
+//       border-radius: 8px;
+//       font-size: 1rem;
+//       cursor: pointer;
+//     }
+//   }
+
+//   .hero-img-container {
+//     position: absolute;
+//     top: 50px; /* Đặt chiều cao chính xác để đè lên phần text */
+//     right: 0;
+//     // max-width: 50%;
+//     z-index: 0; /* Đảm bảo ảnh nằm dưới nội dung */
+    
+//     .hero-img {
+//       width: 100%;
+//       height: auto;
+//     }
+//   }
+
+//   // Responsive Adjustments
+
+//   @media (max-width: 992px) {
+//     .container {
+//       flex-direction: column;
+//       text-align: center;
+//       align-items: center;
+//     }
+
+//     .hero-content {
+//       max-width: 100%;
+//       margin-bottom: 50px;
+
+//       h1 {
+//         font-size: 2.5rem;
+//       }
+
+//       p {
+//         max-width: 100%;
+//         margin: 0 auto;
+//       }
+
+//       .learn-more {
+//         margin: 0 auto;
+//       }
+//     }
+
+//     .hero-img-container {
+//       position: static;
+//       max-width: 80%;
+//       margin: 0 auto;
+
+//       .hero-img {
+//         width: 100%;
+//       }
+//     }
+//   }
+
+//   @media (max-width: 768px) {
+//     padding: 100px 0;
+
+//     .hero-content {
+//       h1 {
+//         font-size: 2rem;
+//       }
+
+//       p {
+//         font-size: 1rem;
+//       }
+
+//       .learn-more {
+//         padding: 10px 20px;
+//       }
+//     }
+
+//     .hero-img-container {
+//       max-width: 100%;
+//     }
+//   }
+
+//   @media (max-width: 576px) {
+//     padding: 80px 0;
+
+//     .hero-content {
+//       h1 {
+//         font-size: 1.75rem;
+//       }
+
+//       p {
+//         font-size: 0.875rem;
+//       }
+
+//       .learn-more {
+//         padding: 8px 16px;
+//         font-size: 0.875rem;
+//       }
+//     }
+//   }
+// }
+
+
+

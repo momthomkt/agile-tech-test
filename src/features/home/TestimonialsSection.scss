@@ -1,0 +1,191 @@
+// // Carousel.scss
+.testimonials-section {
+  margin: 80px 0;
+  .hbox {
+    .carousel-wrapper {
+      // width: 100%;
+      margin: 0 auto;
+      padding: 94.17px;
+      background-color: var(--color-3);
+      border-radius: 25px;
+      // text-align: center;
+      position: relative;
+    }
+    .carousel-title {
+      color: #ffffff;
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+    .carousel-card {
+      background-color: #ffffff;
+      border-radius: 15px;
+      padding: 3.4375rem;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+      height: 20.661875rem;
+      .card-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+        .card-image-container {
+          .card-image {
+            object-fit: cover;
+            text-align: center;
+            width: 8.125rem;
+            height: 5.635rem;
+            background: var(--color-1);
+            border-radius: 4.0625rem / 2.8175rem;
+        }
+
+          
+        }
+        .card-text {
+          width: 80%;
+          text-align: start;
+          
+          .name {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 28.8px;
+            letter-spacing: 0.005em;
+          }
+          .url-web {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 22.4px;
+            letter-spacing: 0.01em;
+            color: var(--color-3);
+          }
+          p {
+            width: 60%;
+            font-size: 1.125rem;
+            font-weight: 400;
+            line-height: 2.025rem;
+            color: var(--color-1);
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+      }
+    }
+  }
+
+  .slick-prev:before{
+    content: url('../../resources/images/arrowPrev.svg')!important;
+    position: absolute;
+    right: 20px;
+
+  }
+
+  .slick-next:before{
+    content: url('../../resources/images/arrowNext.svg')!important;
+    position: absolute;
+    left: 20px;
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: var(--color-4);
+    opacity: 1;
+    font-size: 10px;
+  }
+
+  .slick-dots li button:before {
+    color: #FFFFFF;
+    opacity: 1;
+  }
+
+  @media (max-width:600px) {
+    .hbox {
+      .carousel-wrapper {
+        padding: 30px !important;
+      }
+      .carousel-card {
+        // padding: 2rem;
+        .card-content {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .card-text {
+            text-align: center;
+            p {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    .slick-prev:before{
+      content: '' !important;
+    }
+
+    .slick-next:before{
+      content: '' !important;
+    }
+  }
+
+  @media (max-width:800px) {
+    .hbox {
+      .carousel-wrapper {
+        padding: 60px;
+      }
+      .carousel-card {
+        padding: 2rem;
+        .card-content {
+          .card-text {
+            p {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+    .slick-prev:before{
+      transform: scale(0.7);
+      right: 0;
+    }
+
+    .slick-next:before{
+      transform: scale(0.7);
+      left: 0;
+    }
+  }
+
+}
+// .card-image {
+//   border-radius: 50%;
+//   margin-right: 20px;
+// }
+
+// .card-text h3 {
+//   margin-bottom: 5px;
+// }
+
+// .slick-prev, .slick-next {
+//   color: #ffffff;
+//   z-index: 1;
+// }
+
+// .slick-dots li button:before {
+//   opacity: 1;
+//   color: #d3d3d3;
+// }
+
+// .slick-dots li.slick-active button:before {
+//   color: #ff0080;
+// }
+
+// .slick-slide {
+//   padding: 0 10px; /* Điều chỉnh giá trị này để thêm khoảng cách giữa các slide */
+// }
+
+// .slick-list {
+//   margin: 0 -10px; /* Điều chỉnh giá trị này để bù đắp cho phần padding */
+// }
+
+///////////////////////////////////////

@@ -1,0 +1,40 @@
+.feature-section {
+  .hbox {
+    .head {
+      display: flex;
+      flex-direction: column;
+      // justify-content: center;
+      align-items: center;
+      gap: 50px;
+      margin-bottom: 3.75rem;
+      .title {
+        font-weight: 700;
+        // font-size: 40px;
+        font-size: 2.5rem;
+        color: var(--color-2);
+      }
+      .description {
+        font-weight: 500;
+        font-size: 1.125rem;
+        // line-height: 28.8px;
+        width: 52%;
+        color: var(--color-1);
+        text-align: center;
+          @media (max-width: 789px) {
+            
+              width: 90%;
+            
+          }
+      }
+    }
+    .body {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      @media(max-width: 789px) {
+        grid-template-columns: repeat(1, 1fr);
+      }
+      justify-items: center;
+      gap: 25px;
+    }
+  }
+}
