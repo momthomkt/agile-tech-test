@@ -1,4 +1,4 @@
-import SignIn from '../features/signIn/SignIn'
+import SignIn from '../features/auth/SignIn'
 
 const SignInPage = () => {
   return <SignIn />

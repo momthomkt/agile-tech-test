@@ -2,7 +2,8 @@ const URL_API_CONST = {
   AUTH: {
     LOGIN: "/auth/login",
     SIGNUP: "/auth/sign-up",
-    
+    REFRESH_TOKEN: "/auth/refreshToken",
+    LOGOUT: "/auth/logout"
   },
   POST: {
 
