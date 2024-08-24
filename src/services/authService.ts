@@ -3,6 +3,7 @@ import { NavigateFunction } from 'react-router-dom';
 import { toast } from "react-toastify";
 
 import apiClient from '../configs/api';
+import customAPI  from './axiosInstance';
 import URL_API_CONST from '../constants/URL_API_const';
 import URL_CONST from '../constants/URL_const';
 import { AppDispatch } from '../app/store';
@@ -38,12 +39,19 @@ export const login = (username: string, navigate : NavigateFunction) => async (d
     // Lưu refreshToken trong cookie client-side
     // document.cookie = `refreshToken=${refreshToken}; Secure; SameSite=Strict; Path=/; Max-Age=2592000`;
   } catch (error) {
-    toast.error('Unauthorized', { theme: "colored" })
+    toast.error('Error System', { theme: "colored" })
   }
 };
 
-export const logoutUser = () => (dispatch: AppDispatch) => {
-  dispatch(logout());
+export const logoutUser = (navigate : NavigateFunction) => async (dispatch: AppDispatch) => {
+  try {
+    await customAPI.delete(`${URL_API_CONST.AUTH.LOGOUT}`);
+    dispatch(logout());
+    navigate(URL_CONST.SIGIN);
+    toast.success('Logout successfully!', { theme: "colored" })
+  } catch (error) {
+    toast.error('Error System', { theme: "colored" })
+  }
 };
 
 function getCookie(name: string): string | null {

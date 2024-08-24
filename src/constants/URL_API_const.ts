@@ -6,7 +6,8 @@ const URL_API_CONST = {
     LOGOUT: "/auth/logout"
   },
   POST: {
-    GET_ALL_TAGS: "/posts/tags"
+    GET_ALL_TAGS: "/posts/tags",
+    GET: "/posts"
   },
   GALLERIES: "/galleries"
 };

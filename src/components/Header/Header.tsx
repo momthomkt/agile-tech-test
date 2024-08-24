@@ -1,5 +1,5 @@
 import './Header.scss'
-import { useLocation, Link, NavLink } from 'react-router-dom';
+import { useLocation, useNavigate ,Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { useLogout } from '../../hooks/useLogout';
@@ -7,15 +7,20 @@ import { ReactComponent as Logo } from "../../resources/images/logo.svg"
 
 import URL_CONST from '../../constants/URL_const';
 import { RootState, AppDispatch } from '../../app/store';
+import { useAppDispatch } from '../../app/hook';
+import { logoutUser } from '../../services/authService';
+
 
 const Header = () => {
-  const logout = useLogout();
+  // const logout = useLogout();
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  // const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   
 
   const handleLogout = () => {
-    logout();
+    // logout();
+    dispatch(logoutUser(navigate))
   };
 
   return (
