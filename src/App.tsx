@@ -57,11 +57,15 @@ import ProtectedPage from './pages/ProtectedPage';
 import ProfilePage from './pages/ProfilePage'
 
 import URL_CONST from './constants/URL_const';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
   return (
     // <Provider store={store}>
+    <div className="app">
+      <ToastContainer />
       <Router>
         <Routes>
           <Route path={`${URL_CONST.HOME}`} element={<HomePage />} />
@@ -73,6 +77,7 @@ function App() {
           />
         </Routes>
       </Router>
+    </div>
     // </Provider>
   );
 }

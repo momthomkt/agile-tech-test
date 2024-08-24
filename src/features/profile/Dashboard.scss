@@ -1,0 +1,49 @@
+.dashboard {
+  display: flex;
+
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+
+      .btn-add {
+        padding: 10px 20px;
+        background-color: #a29bfe;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+      }
+
+      .filters {
+        display: flex;
+        gap: 10px;
+
+        input {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+      }
+    }
+
+    .pagination {
+      margin-top: 20px;
+      display: flex;
+      justify-content: flex-end;
+
+      button {
+        padding: 10px 20px;
+        background-color: #dfe6e9;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}

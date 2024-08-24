@@ -1,21 +1,23 @@
 import './Header.scss'
 import { useLocation, Link, NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import { useLogout } from '../../hooks/useLogout';
 import { ReactComponent as Logo } from "../../resources/images/logo.svg"
 
 import URL_CONST from '../../constants/URL_const';
-import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../app/store';
-import { logoutUser } from '../../services/authService';
 
 const Header = () => {
-  const location = useLocation();
+  const logout = useLogout();
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-  console.log("check isAuthenticated: ", isAuthenticated)
-  const dispatch: AppDispatch = useDispatch();
+  // const dispatch: AppDispatch = useDispatch();
+  
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    logout();
   };
+
   return (
     <header className="main">
       <div className="hbox">
@@ -51,10 +53,12 @@ const Header = () => {
             </button>
           </Link>
         ) : (
-          <>
-            <button className="btn-header profile-btn">
-              Profile
-            </button>
+            <>
+              <Link to={`${URL_CONST.PROFILE}`}>
+                <button className="btn-header profile-btn">
+                  Profile
+                </button>
+              </Link>
             <button className="btn-header logout-btn" onClick={handleLogout}>
               Logout
             </button>

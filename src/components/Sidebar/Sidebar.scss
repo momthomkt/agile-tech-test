@@ -1,0 +1,71 @@
+.sidebar-container {
+  height: 100%;
+  @media only screen and (max-width: 1024px) {
+    // display: none;
+    position: Fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 999;
+  }
+  .toggle-btn {
+      // display: none;
+    display: block;
+    position: absolute;
+    right: -22px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    background-color: #D9D9D9;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    padding: 3px;
+    z-index: 999;
+  }
+  .sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    height: 100vh;
+    position: relative;
+    transition: width 0.3s ease;
+    
+    &.closed {
+      // width: 50px; /* Khi sidebar đóng lại */
+      display: none;
+    }
+
+    // .toggle-btn {
+    //   position: absolute;
+    //   top: 10px;
+    //   right: -20px;
+    //   width: 20px;
+    //   height: 20px;
+    //   background-color: #fff;
+    //   border: 1px solid #ccc;
+    //   border-radius: 50%;
+    //   display: flex;
+    //   justify-content: center;
+    //   align-items: center;
+    //   cursor: pointer;
+    // }
+
+  
+
+    .menu {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+
+      a {
+        text-decoration: none;
+        color: #333;
+        margin-bottom: 15px;
+
+        &:hover {
+          color: #007bff;
+        }
+      }
+    }
+  }
+}
+

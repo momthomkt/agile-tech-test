@@ -1,9 +1,13 @@
 import axios from 'axios';
+import { NavigateFunction } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 import apiClient from '../configs/api';
 import URL_API_CONST from '../constants/URL_API_const';
+import URL_CONST from '../constants/URL_const';
 import { AppDispatch } from '../app/store';
 import { loginSuccess, logout, refreshTokenSuccess } from '../features/auth/authSlice';
+
 
 // const API_URL = 'https://yourapi.com';
 
@@ -20,21 +24,21 @@ import { loginSuccess, logout, refreshTokenSuccess } from '../features/auth/auth
 //   }
 // };
 
-export const login = (username: string) => async (dispatch: AppDispatch) => {
+export const login = (username: string, navigate : NavigateFunction) => async (dispatch: AppDispatch) => {
   try {
     const response = await apiClient.post(`${URL_API_CONST.AUTH.LOGIN}`, { username });
     const { accessToken, refreshToken } = response.data;
 
-    // Lưu accessToken trong Redux store
-    dispatch(loginSuccess(accessToken));
-    console.log("check refreshToken: ", refreshToken)
+    // Save accessToken, refreshToken in Redux store
+    dispatch(loginSuccess({ accessToken, refreshToken }));
+    navigate(URL_CONST.HOME);
+    toast.success('Login successfully!', { theme: "colored" })
     // Lưu refreshToken trong một HTTP-Only cookie từ phía BE
     // document.cookie = `refreshToken=${refreshToken}; HttpOnly; Secure; SameSite=Strict`;
     // Lưu refreshToken trong cookie client-side
-    document.cookie = `refreshToken=${refreshToken}; Secure; SameSite=Strict; Path=/; Max-Age=2592000`;
-    console.log("document.cookie: ", document.cookie)
+    // document.cookie = `refreshToken=${refreshToken}; Secure; SameSite=Strict; Path=/; Max-Age=2592000`;
   } catch (error) {
-    console.error('Login failed:', error);
+    toast.error('Unauthorized', { theme: "colored" })
   }
 };
 
@@ -48,9 +52,8 @@ function getCookie(name: string): string | null {
   return null;
 }
 
-export const refreshToken = () => async (dispatch: AppDispatch) => {
+export const refreshToken = (refresh_token: string | null) => async (dispatch: AppDispatch) => {
   try {
-    const refreshToken = getCookie('refreshToken');
 
     if (!refreshToken) {
       throw new Error('No refresh token found');
@@ -60,10 +63,10 @@ export const refreshToken = () => async (dispatch: AppDispatch) => {
 
     const { accessToken, refreshToken: newRefreshToken } = response.data;
 
-    dispatch(refreshTokenSuccess(accessToken));
+    dispatch(refreshTokenSuccess({ accessToken, refreshToken: newRefreshToken }));
 
     // Cập nhật refreshToken trong HTTP-Only cookie
-    document.cookie = `refreshToken=${newRefreshToken}; HttpOnly; Secure; SameSite=Strict`;
+    // document.cookie = `refreshToken=${newRefreshToken}; HttpOnly; Secure; SameSite=Strict`;
   } catch (error) {
     console.error('Refresh token failed:', error);
     dispatch(logout());
