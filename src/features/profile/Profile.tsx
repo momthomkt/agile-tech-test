@@ -1,42 +1,10 @@
-// import './Profile.scss'
-// import { useState, useEffect } from 'react'
-
-// import Sidebar from '../../components/Sidebar/Sidebar'
-// import Dashboard from './Dashboard'
-// import Table from './Table'
-
-// import postsService from '../../services/postsService'
-
-// const Profile = () => {
-  // const [tags, setTags] = useState()
-  // useEffect(() => {
-  //   const handleGetAllTag = async () => {
-  //     try {
-  //       const res = await postsService.getAllTag()
-  //       console.log(res.data)
-  //       setTags(res.data)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  //   handleGetAllTag()
-  //   console.log("render nhieu lan")
-  // },[])
-//   return (
-//     <div className="profile">
-//       Profile
-//     </div>
-//   )
-// }
-
-// export default Profile
-
 import { useState, useEffect } from 'react'
-import { Pagination, Select, Spin } from 'antd';
-import { DownOutlined } from '@ant-design/icons'
+import { Pagination, Select } from 'antd';
 
 import Sidebar from '../../components/Sidebar/Sidebar';
 import Table from './Table';
+import ModalCreateEdit from './ModalCreateEdit';
+
 import { ReactComponent as ArrowDropdown } from "../../resources/images/arrowDropdown.svg"
 
 import postsService, {getPostParam} from '../../services/postsService';
@@ -57,6 +25,15 @@ const Profile = () => {
   })
   const [currTitle, setCurrTitle] = useState<string>('')
   const [currTag, setCurrTag] = useState<string>('')
+  const [isModalCreateOpen, setIsModalCreateOpen] = useState(false);
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false);
+  const [currPostEdit, setcurrPostEdit] = useState<postType>({
+    id: '',
+    title: '',
+    description: '',
+    tags: []
+  });
+
   useEffect(() => {
     const handleGetAllTag = async () => {
       try {
@@ -78,13 +55,18 @@ const Profile = () => {
     if (dataPaging.current_page > 0) {
       handleGetPost()
     }
-  },[dataPaging])
+  }, [dataPaging])
+  
+    useEffect(() => {
+      handleGetPost(1)
+  },[currTag, currTitle])
 
-  const handleGetPost = async () => {
+  const handleGetPost = async (current_page? : number) => {
     let param: getPostParam = {}
-    if(currTag) param.tag = currTag
-    if(currTitle) param.title = currTitle
-    if(dataPaging.current_page) param.page = dataPaging.current_page
+    if(currTag) param.tags = currTag
+    if (currTitle) param.title = currTitle
+    if (current_page) param.page = current_page
+    else if(dataPaging.current_page) param.page = dataPaging.current_page
     postsService.getPost(param)
       .then((res) => {
         setPost(res.data?.posts)
@@ -116,46 +98,43 @@ const Profile = () => {
   const handleChangeTag = (value: string) => {
     setCurrTag(value);
   };
+
+  const OpenModalCreate = () => {
+    setIsModalCreateOpen(true)
+    
+  }
+
   return (
     <div className="profile">
       <Sidebar />
       <div className="content">
         <header>
-          <button className="btn-add">Add new</button>
+          <button onClick={OpenModalCreate} className="btn-add">Add new</button>
           <div className="filters">
-            <input type="text" placeholder="Title" />
+            <input type="text" placeholder="Title" onChange={(e)=>setCurrTitle(e.target.value)}/>
             {/* <input type="text" placeholder="Tags" /> */}
             <Select
-              placeholder={"Tag"}
+              placeholder={"Tags"}
               value={!currTag ? null : currTag}
               onChange={handleChangeTag}
               style={{ width: 200 }} // Điều chỉnh kích thước nếu cần
               className="custom-dropdown"
               dropdownStyle={{ borderRadius: '4px' }} // Custom dropdown style
               suffixIcon={<ArrowDropdown />} // Sử dụng icon mũi tên xuống
-              options={[
-                {
-                  value: 'jack',
-                  label: 'Jack',
-                },
-                {
-                  value: 'lucy',
-                  label: 'Lucy',
-                },
-                {
-                  value: 'tom',
-                  label: 'Tom',
-                },
-              ]}
+              options={[{
+                value: "",
+                  label: '',
+              }].concat(tags.map((value, index) => {
+                return {
+                  key: index,
+                  value: value,
+                  label: value,
+                }
+              }))}
             />
-              {/* <Option value="tag1">Tag 1</Option>
-              <Option value="tag2">Tag 2</Option>
-              <Option value="tag3">Tag 3</Option> */}
-              {/* Thêm các tùy chọn khác nếu cần */}
-            {/* </Select> */}
           </div>
         </header>
-        <Table posts={posts} />
+        <Table setcurrPostEdit={setcurrPostEdit} isModalEditOpen={isModalEditOpen} setIsModalEditOpen={setIsModalEditOpen} fetchPost={handleGetPost} posts={posts} />
         <div className="pagination">
           {Math.ceil(dataPaging.total / dataPaging.page_size) > 1 && <Pagination
             defaultCurrent={1}
@@ -166,6 +145,8 @@ const Profile = () => {
           />}
         </div>
       </div>
+      <ModalCreateEdit fetchPost={handleGetPost} tags={tags} isModalOpen={isModalCreateOpen} setIsModalOpen={setIsModalCreateOpen} />
+      <ModalCreateEdit post={currPostEdit} fetchPost={handleGetPost} tags={tags} isModalOpen={isModalEditOpen} setIsModalOpen={setIsModalEditOpen}/>
     </div>
   );
 };

@@ -4,7 +4,7 @@
 
 // const api = axios.create({
 //   baseURL: `${process.env.REACT_APP_API_URL}`,
-//   withCredentials: true, // Bật để gửi cookie cùng với các yêu cầu
+//   withCredentials: true,
 // });
 
 // api.interceptors.request.use(
@@ -41,8 +41,7 @@
 /////////////////////////////////
 import axios from 'axios';
 import store from '../app/store';
-import { refreshToken, logoutUser } from './authService';
-import { useLogout } from '../hooks/useLogout';
+import { refreshToken } from './authService';
 
 const api = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}`,

@@ -1,27 +1,60 @@
-import React from 'react';
-import './Table.scss';
+import { Modal } from 'antd';
+import { toast } from 'react-toastify'
 import { Tooltip } from 'react-tooltip';
 import { postType } from './profileTypes';
+import postsService from '../../services/postsService';
+import { Dispatch, SetStateAction } from 'react';
+import './Table.scss';
 
 interface TableProps {
   posts: postType[];
+  fetchPost: (current_page?: number) => Promise<void>
+  isModalEditOpen: boolean
+  setIsModalEditOpen: Dispatch<SetStateAction<boolean>>
+  setcurrPostEdit: Dispatch<SetStateAction<postType>>
 }
 
-const Table = ({ posts }: TableProps) => {
+const { confirm } = Modal
+
+const Table = ({ posts, fetchPost, isModalEditOpen, setIsModalEditOpen, setcurrPostEdit }: TableProps) => {
 
   const displayString = (value: any): string => {
     let result: string;
     if (Array.isArray(value)) {
       result = value.join(', ');
     } else if (typeof value === 'object' && value !== null) {
-      // Nếu là object
       result = Object.values(value).join(', ');
     } else {
-      // Các kiểu dữ liệu khác
       result = String(value);
     }
 
     return result;
+  }
+
+  const handleDeltePost = (id: string) => {
+    postsService.delete(id)
+      .then(res => {
+        fetchPost()
+        toast.info('Deleted', { theme: "colored" });
+      })
+      .catch(err => {
+        toast.error('System error', { theme: "colored" });
+    })
+  }
+
+  const OpenModalConfirm = (id: string) => {
+    confirm({
+      title: 'Confirm',
+      content: `Do you want to delete this post?`,
+      onOk: () => {
+        handleDeltePost(id)
+      },
+    })
+  }
+
+  const OpenModalEdit = (post: postType) => {
+    setIsModalEditOpen(true);
+    setcurrPostEdit(post);
   }
 
   return (
@@ -38,7 +71,8 @@ const Table = ({ posts }: TableProps) => {
       <tbody>
         {posts.map((post, idx) => (
           <tr key={idx}>
-            <td>{idx + 1}</td>
+            {/* <td>{idx + 1}</td> */}
+            <td>{post.id}</td>
             <td>
               <span data-tooltip-id={`tooltip-title-${idx}`} data-tooltip-content={post.title}>
                 {post.title}
@@ -59,8 +93,8 @@ const Table = ({ posts }: TableProps) => {
               <Tooltip id={`tooltip-tags-${idx}`} />
             </td>
             <td className='action'>
-              <button className="btn-edit">✏️</button>
-              <button className="btn-delete">🗑️</button>
+              <button onClick={()=>OpenModalEdit(post)} className="btn-edit">✏️</button>
+              <button onClick={()=>OpenModalConfirm(post.id)} className="btn-delete">🗑️</button>
             </td>
           </tr>
         ))}
@@ -71,9 +105,6 @@ const Table = ({ posts }: TableProps) => {
 
 export default Table;
 
-
-
-// import React from 'react';
 // import './Table.scss';
 
 // const Table: React.FC = () => {

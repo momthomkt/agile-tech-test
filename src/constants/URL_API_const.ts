@@ -7,7 +7,7 @@ const URL_API_CONST = {
   },
   POST: {
     GET_ALL_TAGS: "/posts/tags",
-    GET: "/posts"
+    POST: "/posts"
   },
   GALLERIES: "/galleries"
 };
