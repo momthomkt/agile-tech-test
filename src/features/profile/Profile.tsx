@@ -38,10 +38,8 @@ const Profile = () => {
     const handleGetAllTag = async () => {
       try {
         const res = await postsService.getAllTag()
-        console.log(res.data)
         setTags(res.data)
       } catch (error) {
-        console.log(error)
       }
     }
     handleGetAllTag()
@@ -83,9 +81,6 @@ const Profile = () => {
           return prevDataPaging;
         });
       })
-      .catch((err) => {
-        console.log(err)
-    })
   }
 
   const handleChangePage = (pageNumber: number) => {
@@ -112,12 +107,11 @@ const Profile = () => {
           <button onClick={OpenModalCreate} className="btn-add">Add new</button>
           <div className="filters">
             <input type="text" placeholder="Title" onChange={(e)=>setCurrTitle(e.target.value)}/>
-            {/* <input type="text" placeholder="Tags" /> */}
             <Select
               placeholder={"Tags"}
               value={!currTag ? null : currTag}
               onChange={handleChangeTag}
-              style={{ width: 200 }} // Điều chỉnh kích thước nếu cần
+              style={{ width: 200 }}
               className="custom-dropdown"
               dropdownStyle={{ borderRadius: '4px' }} // Custom dropdown style
               suffixIcon={<ArrowDropdown />} // Sử dụng icon mũi tên xuống

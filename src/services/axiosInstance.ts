@@ -69,15 +69,16 @@ api.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
-
     // Kiểm tra nếu lỗi 401(Unauthorized) và chưa thử làm mới token
     // if (error.response.status === 401 && !originalRequest._retry) {
-    if (error.response && error.response.status === 401 && !originalRequest._retry) {
+    if ((error.response && (error.response.status === 401 || error.response.status === 403)) && !originalRequest._retry) {
+      console.log("Vao day dc ne moi nguoi: ", error.response.status)
       originalRequest._retry = true;
 
       const prevState = store.getState();
       const refresh_token = prevState.auth.refreshToken;
-
+      console.log("prevState: ", prevState)
+      console.log("refresh_token: ", refresh_token)
       try {
         // Thử làm mới accessToken
         await store.dispatch(refreshToken(refresh_token));

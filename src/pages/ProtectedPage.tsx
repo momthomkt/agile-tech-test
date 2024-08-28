@@ -13,7 +13,6 @@ const ProtectedPage: React.FC = () => {
   // const fetchProtectedData = async () => {
   //   try {
   //     const response = await api.get('/protected/data');
-  //     console.log(response.data);
   //   } catch (error) {
   //     console.error('Failed to fetch protected data:', error);
   //   }

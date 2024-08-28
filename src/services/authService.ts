@@ -2,6 +2,7 @@ import axios from 'axios';
 import { NavigateFunction } from 'react-router-dom';
 import { toast } from "react-toastify";
 
+import api from './axiosInstance';
 import apiClient from '../configs/api';
 import customAPI  from './axiosInstance';
 import URL_API_CONST from '../constants/URL_API_const';
@@ -63,11 +64,11 @@ function getCookie(name: string): string | null {
 export const refreshToken = (refresh_token: string | null) => async (dispatch: AppDispatch) => {
   try {
 
-    if (!refreshToken) {
+    if (!refresh_token) {
       throw new Error('No refresh token found');
     }
 
-    const response = await apiClient.post(`${URL_API_CONST.AUTH.REFRESH_TOKEN}`, { refreshToken }, { withCredentials: true });
+    const response = await api.post(`${URL_API_CONST.AUTH.REFRESH_TOKEN}`, { refresh_token }, { withCredentials: true });
 
     const { accessToken, refreshToken: newRefreshToken } = response.data;
 

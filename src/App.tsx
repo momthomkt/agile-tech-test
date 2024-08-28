@@ -48,6 +48,8 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { Provider, useSelector } from 'react-redux';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { RootState } from './app/store';
 import store from "./app/store";
@@ -55,10 +57,11 @@ import HomePage from './pages/HomePage';
 import SignInPage from './pages/SignInPage';
 import ProtectedPage from './pages/ProtectedPage';
 import ProfilePage from './pages/ProfilePage'
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import NotFoundPage from './pages/NotFoundPage';
 
 import URL_CONST from './constants/URL_const';
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
@@ -70,11 +73,15 @@ function App() {
         <Routes>
           <Route path={`${URL_CONST.HOME}`} element={<HomePage />} />
           <Route path={`${URL_CONST.SIGIN}`} element={<SignInPage />} />
-          <Route path={`${URL_CONST.PROFILE}`} element={<ProfilePage />} />
-          <Route
-            path="/protected"
-            element={isAuthenticated ? <ProtectedPage /> : <Navigate to={`${URL_CONST.SIGIN}`} />}
-          />
+          
+          {/* Các route yêu cầu xác thực */}
+          <Route element={<PrivateRoute />}>
+            <Route path={`${URL_CONST.PROFILE}`} element={<ProfilePage />} />
+
+          </Route>
+
+          {/* Route cho trang 404 */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Router>
     </div>
@@ -83,30 +90,4 @@ function App() {
 }
 
 export default App;
-
-//////////////////////////////////
-// import React from 'react';
-// import { Route, Routes, Navigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { RootState } from './store';
-// import HomePage from './pages/HomePage';
-// import LoginPage from './pages/LoginPage';
-// import ProtectedPage from './pages/ProtectedPage';
-
-// const App: React.FC = () => {
-//   const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated);
-
-//   return (
-//     <Routes>
-//       <Route path="/" element={<HomePage />} />
-//       <Route path="/login" element={<LoginPage />} />
-//       <Route
-//         path="/protected"
-//         element={isAuthenticated ? <ProtectedPage /> : <Navigate to="/login" />}
-//       />
-//     </Routes>
-//   );
-// };
-
-// export default App;
 

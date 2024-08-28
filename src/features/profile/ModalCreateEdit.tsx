@@ -96,9 +96,8 @@ const ModalCreateEdit = (
     }
   };
 
-  const onFinishFailed: FormProps<postCreateEditType>['onFinishFailed'] = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
+  // const onFinishFailed: FormProps<postCreateEditType>['onFinishFailed'] = (errorInfo) => {
+  // };
 
   return (
     <>

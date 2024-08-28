@@ -157,10 +157,10 @@ const TestimonialsSection = () => {
     const handleGetGalleries = async () => {
       try {
         const res = await GalleriesService.getAll()
-        console.log(res.data)
+
         setGalleries(res.data)
       } catch (error) {
-        console.log(error)
+
       }
     }
     handleGetGalleries();

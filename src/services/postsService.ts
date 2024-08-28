@@ -28,7 +28,6 @@ class postsService {
   }
 
   update(postId: string, postParam: postCreateType) {
-    console.log("check postId: ", postId)
     return api.patch(`${URL_API_CONST.POST.POST}/${postId}`, postParam)
   }
 
